@@ -79,8 +79,27 @@ function getDayName(date) {
  * Date('2024-02-13T00:00:00Z') => Date('2024-02-16T00:00:00Z')
  * Date('2024-02-16T00:00:00Z') => Date('2024-02-23T00:00:00Z')
  */
-function getNextFriday(/* date */) {
-  throw new Error('Not implemented');
+function getNextFriday(date) {
+  const day = new Date(date);
+  const days = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+
+  if (days[day.getDay()] === 'Friday') {
+    day.setDate(day.getDate() + 7);
+  } else {
+    const daysUntilFriday =
+      day.getDay() < 5 ? 5 - day.getDay() : 12 - day.getDay();
+    day.setDate(day.getDate() + daysUntilFriday);
+  }
+
+  return day;
 }
 
 /**
